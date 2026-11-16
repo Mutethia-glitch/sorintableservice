@@ -61,12 +61,13 @@ export function PosProvider({ children }: { children: ReactNode }) {
     const s = stateRef.current; if (!s) return null;
     const matches = s.staff.filter((x) => x.active && x.pin === pin);
     if (matches.length !== 1) return null; // demo: exact unique match only
-    sessionStorage.setItem(SESSION_KEY, matches[0].id); setUserId(matches[0].id);
-    return matches[0];
+    const who = matches[0]!;
+    sessionStorage.setItem(SESSION_KEY, who.id); setUserId(who.id);
+    return who;
   }, []);
   const logout = useCallback(() => { sessionStorage.removeItem(SESSION_KEY); setUserId(null); }, []);
   const verifyManager = useCallback((pin: string) =>
-    stateRef.current?.staff.find((x) => x.active && x.role === "manager" && x.pin === pin) ?? null, []);
+    stateRef.current?.staff.find((x) => x.active && x.role === "manager" && x.pin === pin) ?? null, []) as Ctx["verifyManager"];
 
   const api = useMemo(() => ({
     addToDraft: (tableId: string, itemId: string) => update((cur) => {

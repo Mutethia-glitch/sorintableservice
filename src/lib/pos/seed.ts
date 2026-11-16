@@ -42,7 +42,7 @@ export const DEMO_MENU: MenuItem[] = [
 export const DEMO_TABLES: Table[] = Array.from({ length: 10 }, (_, i) => ({
   id: `t-${String(i + 1).padStart(2, "0")}`,
   name: `Table ${String(i + 1).padStart(2, "0")}`,
-  seats: [2, 4, 4, 4, 6, 2, 4, 8, 4, 2][i],
+  seats: [2, 4, 4, 4, 6, 2, 4, 8, 4, 2][i] ?? 4,
 }));
 
 /** Built lazily (never at module scope) so timestamps are relative to "now". */
@@ -66,6 +66,7 @@ export function makeSeed(now: number): PosState {
     };
     for (const [itemId, qty, note = ""] of items) {
       const mi = menuById[itemId];
+      if (!mi) continue;
       order.lines.push({ id: `l-${id++}`, itemId, name: mi.name, price: mi.price, qty, note, ticketId: t.id, sentAt: createdAt });
       t.items.push({ name: mi.name, qty, note });
     }

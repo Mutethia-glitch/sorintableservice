@@ -62,7 +62,7 @@ export function AppShell({ children }: { children: ReactNode }) {
       <div className="flex min-h-0 flex-1">
         <nav aria-label="Main" className="no-print flex w-[88px] shrink-0 flex-col gap-1 bg-sidebar p-2 text-sidebar-foreground xl:w-52">
           {items.map(({ to, label, icon: Icon }) => (
-            <Link key={to} to={to}
+            <Link key={to} to={to as "/"}
               className="relative flex min-h-14 flex-col items-center justify-center gap-1 rounded-lg px-2 text-center text-[11px] font-medium transition hover:bg-sidebar-accent xl:flex-row xl:justify-start xl:gap-3 xl:px-3 xl:text-sm"
               activeProps={{ className: "bg-sidebar-accent text-sidebar-accent-foreground ring-1 ring-sidebar-primary/50" }}>
               <Icon className="size-5" />{label}
