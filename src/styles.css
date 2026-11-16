@@ -62,6 +62,16 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
+  --color-status-available: var(--status-available);
+  --color-status-available-soft: var(--status-available-soft);
+  --color-status-occupied: var(--status-occupied);
+  --color-status-occupied-soft: var(--status-occupied-soft);
+  --color-status-awaiting: var(--status-awaiting);
+  --color-status-awaiting-soft: var(--status-awaiting-soft);
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, serif;
   --color-sidebar: var(--sidebar);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
@@ -73,39 +83,47 @@
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
-  --destructive: oklch(0.577 0.245 27.325);
-  --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.984 0.003 247.858);
-  --sidebar-foreground: oklch(0.129 0.042 264.695);
-  --sidebar-primary: oklch(0.208 0.042 265.755);
-  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
-  --sidebar-accent: oklch(0.968 0.007 247.896);
-  --sidebar-accent-foreground: oklch(0.208 0.042 265.755);
-  --sidebar-border: oklch(0.929 0.013 255.508);
-  --sidebar-ring: oklch(0.704 0.04 256.788);
+  --radius: 0.75rem;
+  --background: oklch(0.975 0.011 85);
+  --foreground: oklch(0.22 0.014 250);
+  --card: oklch(0.995 0.004 85);
+  --card-foreground: oklch(0.22 0.014 250);
+  --popover: oklch(0.995 0.004 85);
+  --popover-foreground: oklch(0.22 0.014 250);
+  --primary: oklch(0.47 0.075 160);
+  --primary-foreground: oklch(0.985 0.006 85);
+  --secondary: oklch(0.945 0.012 85);
+  --secondary-foreground: oklch(0.25 0.014 250);
+  --muted: oklch(0.945 0.012 85);
+  --muted-foreground: oklch(0.47 0.015 250);
+  --accent: oklch(0.93 0.03 158);
+  --accent-foreground: oklch(0.32 0.06 160);
+  --destructive: oklch(0.55 0.17 27);
+  --destructive-foreground: oklch(0.985 0.006 85);
+  --border: oklch(0.9 0.012 85);
+  --input: oklch(0.88 0.012 85);
+  --ring: oklch(0.55 0.08 160);
+  --ink: oklch(0.24 0.014 250);
+  --ink-foreground: oklch(0.96 0.01 85);
+  --status-available: oklch(0.52 0.08 160);
+  --status-available-soft: oklch(0.94 0.035 158);
+  --status-occupied: oklch(0.6 0.11 70);
+  --status-occupied-soft: oklch(0.95 0.045 80);
+  --status-awaiting: oklch(0.56 0.13 35);
+  --status-awaiting-soft: oklch(0.94 0.035 40);
+  --chart-1: oklch(0.47 0.075 160);
+  --chart-2: oklch(0.6 0.11 70);
+  --chart-3: oklch(0.56 0.13 35);
+  --chart-4: oklch(0.45 0.04 250);
+  --chart-5: oklch(0.7 0.06 130);
+  --sidebar: oklch(0.24 0.014 250);
+  --sidebar-foreground: oklch(0.92 0.01 85);
+  --sidebar-primary: oklch(0.62 0.08 160);
+  --sidebar-primary-foreground: oklch(0.985 0.006 85);
+  --sidebar-accent: oklch(0.31 0.015 250);
+  --sidebar-accent-foreground: oklch(0.97 0.01 85);
+  --sidebar-border: oklch(0.32 0.014 250);
+  --sidebar-ring: oklch(0.62 0.08 160);
 }
 
 .dark {
@@ -152,4 +170,21 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
   }
+}
+
+@layer base {
+  html { font-family: var(--font-sans); -webkit-tap-highlight-color: transparent; }
+  h1, h2, h3, .font-display { font-family: var(--font-display); letter-spacing: -0.01em; }
+  button { touch-action: manipulation; }
+}
+
+@keyframes shake { 0%,100%{transform:translateX(0)} 20%,60%{transform:translateX(-8px)} 40%,80%{transform:translateX(8px)} }
+@utility animate-shake { animation: shake 0.35s ease-in-out; }
+
+/* Kitchen ticket print stylesheet: only the ticket prints, never anything else. */
+@media print {
+  body * { visibility: hidden !important; }
+  .kitchen-print-area, .kitchen-print-area * { visibility: visible !important; }
+  .kitchen-print-area { position: absolute; left: 0; top: 0; width: 80mm; box-shadow: none !important; border: none !important; }
+  .no-print { display: none !important; }
 }
