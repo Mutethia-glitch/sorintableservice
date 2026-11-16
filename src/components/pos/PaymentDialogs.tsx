@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { cn } from "@/lib/utils";
 import { isUnverified, kes, orderBalance, orderPaid, orderTotal } from "@/lib/pos/logic";
-import { staffName, tableName, usePos } from "@/lib/pos/store";
+import { tableName, usePos } from "@/lib/pos/store";
 import type { Collector, Order, PayMethod } from "@/lib/pos/types";
 
 const METHODS: { v: PayMethod; icon: typeof Banknote }[] = [
@@ -119,7 +119,7 @@ export function CloseBillDialog({ order, open, onOpenChange, onClosed }: { order
           <Button variant="outline" size="touch" onClick={() => onOpenChange(false)}>Keep open</Button>
           <Button size="touch" disabled={!confirm} onClick={() => {
             if (closeBill(order.id)) {
-              toast.success(`Bill closed · ${tableName(state, order.tableId)} is available`, { description: `Closed by ${staffName(state, undefined) === "—" ? "you" : ""}`.trim() || undefined, icon: <CheckCircle2 className="size-4" /> });
+              toast.success(`Bill closed · ${tableName(state, order.tableId)} is available`, { icon: <CheckCircle2 className="size-4" /> });
               onOpenChange(false); onClosed?.();
             } else toast.warning("This bill isn't fully paid yet.");
           }}>Close bill</Button>
